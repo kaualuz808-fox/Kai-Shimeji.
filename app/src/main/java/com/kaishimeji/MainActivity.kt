@@ -42,6 +42,7 @@ class MainActivity : Activity() {
 
         val button = Button(this).apply {
             text = "Ativar o Kai"
+
             setOnClickListener {
                 if (!Settings.canDrawOverlays(this@MainActivity)) {
                     val intent = Intent(
@@ -50,10 +51,16 @@ class MainActivity : Activity() {
                     )
                     startActivity(intent)
                 } else {
+                    startService(
+                        Intent(
+                            this@MainActivity,
+                            PetOverlayService::class.java
+                        )
+                    )
                     Toast.makeText(
                         this@MainActivity,
-                        "Permissão concedida! Kai está quase pronto.",
-                        Toast.LENGTH_LONG
+                        "Kai está na tela! 🐺",
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
             }
