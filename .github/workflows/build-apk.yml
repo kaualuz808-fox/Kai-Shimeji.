@@ -29,9 +29,11 @@ jobs:
 
       - name: Preparar Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
 
-      - name: Instalar componentes Android
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Aceitar licenças Android
+        run: yes | sdkmanager --licenses || true
 
       - name: Compilar aplicativo
         run: gradle assembleDebug
